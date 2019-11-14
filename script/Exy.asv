@@ -1,0 +1,4 @@
+function res = Exy(P,x,lambda)
+    Xf = 
+    Yf = 
+end
