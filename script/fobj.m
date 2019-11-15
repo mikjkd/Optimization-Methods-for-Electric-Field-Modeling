@@ -13,6 +13,9 @@ P = [P1;P2;P3;P4];
 
 f1 = norm(Etot(P, xc, yc, lambda));
 f2 = norm(Exy(P1,xc,yc,lambda(1)));
+%funzione che fa la norma quadra del campo Exy dato da un solo filo
+%nell'intervallo [-0.05, 0.05]
+
 f3 = sqrt((xb-xa)/length(xc))*norm(Exy(P1,xc,yc,lambda(1)))
 
 
