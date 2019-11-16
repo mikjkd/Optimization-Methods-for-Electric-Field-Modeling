@@ -23,17 +23,13 @@ Edesiderata = Etot(P,xc,yc,[lambda(1),lambda(2),lambda(3),lambda(4)]);
 fo =  @(lmbd1) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lambda(3),lambda(4)]))
 %dove faccio variare lmbd1 per fare la ricerca del minimo in 1 variabile
 passo1 = 1e-08:0.0000000001:10e-08;
+
+plot(passo1,foeval(fo,passo1))
+
 %plotto come faria fo al variare di lmbd1
-foplot(fo,passo1);
+%foplot(fo,passo1);
 
 
-%prende l'handler della funzione e lo va a valutare nell'intervallo di
-%valori val
-function foval(fo,val)
-    for i = 1:length(val)
-         A = fo(val(i));
-    end
-end
 %prende l'handler della funzione e lo va a plottare nell'intervallo di
 %valori val
 function foplot(fo,val)
