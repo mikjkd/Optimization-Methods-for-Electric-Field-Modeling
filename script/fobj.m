@@ -20,11 +20,19 @@ P = [P1;P2;P3;P4];
 %nell'intervallo [-0.05, 0.05]
 Edesiderata = Etot(P,xc,yc,[lambda(1),lambda(2),lambda(3),lambda(4)]);
 %scrittura funzione obj normalizzata
-fo =  @(lmbd1) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lambda(3),lambda(4)]))
+%fo dipendende da una variabile lmbd1
+fo =  @(lmbd1) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lambda(3),lambda(4)]));
+%fo dipendende da due variabili lmbd1 e lmbd2
+f1 = @(lmbd1,lmbd2) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lmbd2,lambda(4)]));
+ 
 %dove faccio variare lmbd1 per fare la ricerca del minimo in 1 variabile
-passo1 = 1e-08:0.0000000001:10e-08;
-
-plot(passo1,foeval(fo,passo1))
+passo1 = 1e-08:0.000000001:10e-08;
+%%plot (X, Y)
+%plot(passo1,fo2Deval(fo,passo1));
+%mi creo i punti da graficare in 2 var
+vs = fo3Deval(f1,passo1,passo1);
+surf(passo1,passo1,vs);
+colorbar;
 
 %plotto come faria fo al variare di lmbd1
 %foplot(fo,passo1);
