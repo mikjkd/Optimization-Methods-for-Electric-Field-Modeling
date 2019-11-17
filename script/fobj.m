@@ -25,10 +25,11 @@ Edesiderata = 2.8563e+04;
 fo =  @(lmbd1) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lambda(3),lambda(4)]));
 %fo dipendende da due variabili lmbd1 e lmbd2
 f1 = @(lmbd1,lmbd2) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lmbd2,lambda(4)]));
- 
+
 %dove faccio variare lmbd1 per fare la ricerca del minimo in 1 variabile
 passo1 = 1e-08:0.000000001:10e-08;
 %%plot (X, Y)
+figure(1)
 subplot(2,1,1)
 plot(passo1,fo2Deval(fo,passo1));
 grid
@@ -42,8 +43,9 @@ title('Lambda 2 - Lambda 3');
 
 %plotto come faria fo al variare di lmbd1
 %foplot(fo,passo1);
-
-
+%figure(2)
+%plot(xc, Edesiderata)
+%grid on
 %prende l'handler della funzione e lo va a plottare nell'intervallo di
 %valori val
 function foplot(fo,val)
