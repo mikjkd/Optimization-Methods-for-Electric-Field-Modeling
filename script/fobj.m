@@ -23,30 +23,30 @@ Edesideratax = 2.8563e+04;
 Edesideratay = 2.8563e+04;
 Edesiderata = [Edesideratax; Edesideratay];
 
-fo = @(lmbd) (1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]); Etoty(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)])]);
-
 %scrittura funzione obj normalizzata
 %fo dipendende da una variabile lmbd1
-%fcost = sqrt((xb-xa)/length(xc))*norm(E)*(1/mean(Edesiderata));
-%fo =  @(lmbd1) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lambda(3),lambda(4)]));
-%fo dipendende da due variabili lmbd1 e lmbd2
-%f1 = @(lmbd1,lmbd2) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lmbd2,lambda(4)]));
 
+fo = @(lmbd) (1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]); Etoty(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)])]);
+f1 = @(lmbd1,lmbd2) (1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd2,lambda(4)]); Etoty(P,xc,yc,[lmbd1,lambda(2),lmbd2,lambda(4)])]);
+f2 = @(lmbd1,lmbd2,lmbd3)(1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd2,lmbd3]); Etoty(P,xc,yc,[lmbd1,lambda(2),lmbd2,lmbd3])]);
 %dove faccio variare lmbd1 per fare la ricerca del minimo in 1 variabile
-passo1 = 1e-08:0.000000001:10e-08;
+passo1 = 1e-9:1e-9:1e-7;
 %%plot (X, Y)
-%figure(1)
-%subplot(2,1,1)
-%plot(passo1,fo2Deval(fo,passo1));
-%grid
-%title('Lambda 2');w
+figure(1)
+subplot(1,2,1)
+plot(passo1,fo2Deval(fo,passo1));
+grid
+title('Lambda 2');
 %mi creo i punti da graficare in 2 var
-%vs = fo3Deval(f1,passo1,passo1);
-%subplot(2,1,2)
-%surf(passo1,passo1,vs)
-%title('Lambda 2 - Lambda 3');
+vs = fo3Deval(f1,passo1,passo1);
+subplot(1,2,2)
+[X,Y] = meshgrid(passo1,passo1);
+surf(X,Y,vs)
+colorbar
+title('Lambda 2 - Lambda 3');
 
-
+figure(2)
+contour(X,Y,vs,20)
 %plotto come faria fo al variare di lmbd1
 %foplot(fo,passo1);
 %figure(2)
