@@ -1,6 +1,6 @@
 %scrittura della funzione obiettivo 
 %punti di campionamento
-xc = -0.05:0.0001:0.05;
+xc = -0.05:0.01:0.05;
 %intervallo campionamento xa-xb
 xa = -0.05;
 xb = 0.05;
@@ -21,14 +21,13 @@ P = [P1;P2;P3;P4];
 %Edesiderata = Etot(P,xc,yc,[lambda(1),lambda(2),lambda(3),lambda(4)]);
 Edesideratax = 2.8563e+04;
 Edesideratay = 2.8563e+04;
-Edesiderata = [Edesideratax, Edesideratay];
-[Etotx, Etoty] = Etot(P,xc,yc,[lambda(1),lambda(2),lambda(3),lambda(4)]);
-Eobjx = Edesideratax - Etotx;
-Eobjy = Edesideratay- Etoty;
-Eobj = [Eobjx, Eobjy];
+Edesiderata = [Edesideratax; Edesideratay];
+
+fo = @(lmbd) (1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]); Etoty(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)])]);
+
 %scrittura funzione obj normalizzata
 %fo dipendende da una variabile lmbd1
-fcost = sqrt((xb-xa)/length(xc))*norm(Eobj)*(1/mean(Edesiderata))
+%fcost = sqrt((xb-xa)/length(xc))*norm(E)*(1/mean(Edesiderata));
 %fo =  @(lmbd1) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lambda(3),lambda(4)]));
 %fo dipendende da due variabili lmbd1 e lmbd2
 %f1 = @(lmbd1,lmbd2) (1/mean(Edesiderata))*sqrt((xb-xa)/length(xc))*norm(Edesiderata - Etot(P,xc,yc,[lambda(1),lmbd1,lmbd2,lambda(4)]));
@@ -40,7 +39,7 @@ passo1 = 1e-08:0.000000001:10e-08;
 %subplot(2,1,1)
 %plot(passo1,fo2Deval(fo,passo1));
 %grid
-%title('Lambda 2');
+%title('Lambda 2');w
 %mi creo i punti da graficare in 2 var
 %vs = fo3Deval(f1,passo1,passo1);
 %subplot(2,1,2)
@@ -63,5 +62,4 @@ function foplot(fo,val)
             hold on
         end
     end
-end
-
+end 

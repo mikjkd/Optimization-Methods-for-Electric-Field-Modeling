@@ -1,5 +1,9 @@
 %voglio il campo nei punti (x,y) dato dal filo nel punto P con densità di
 %carica lambda
+%P = [xf, yf] coordinata in cui si trova il filo
+%xc = coordinate x dove vado a valutare il campo
+%yc = coordinate y dove vado a valutare il campo
+%lambda = valori di lambda del filo
 
 function [Ex,Ey] = Exy(P,xc,yc,lambda) 
     xf = P(1);
