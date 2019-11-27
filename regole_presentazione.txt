@@ -1,0 +1,50 @@
+MOTIVARE LE SCELETE COSTRUTTIVE
+    -si presenta una slide al minuto 
+    -Slide sintetiche e telegrafiche, dobbiamo avere delle informazioni e dobbiamo fare un'illustrazione verbale 
+     mettiamo illustrazioni, immagini e grafici difficili da dire a voce, e poi diamo uno schema logico di quello che stiamo dicendo
+     abbiamo delle figure e degli elementi puntati in un linguaggio telegrafico che è indice di quello che dirò
+     slide articolate secondo un indice che comprende i seguenti elementi: 
+        -introduzione
+        -formulazione matematica, ogni gruppo si confronta con un problema, ne crea il modello e poi risolve il modello ovvero la traduzione in un linguaggio matematico del problema
+        -breve illustrazione della tecnica di ottimizzazione (chi parla deve sapere chi ascolta, quindi diamo per scontate le cose che si devono sapere, chi ci ascolta è un esperto di ottimizzazione etc)
+            scegliamo il numero di campioni per il campionamento, e li decidiamo in base a cose come le cifre significative etc
+        -sezione che riguarda l'implementazione del modello matematico (codice in un certo linguaggio), utilizziamo degli strumenti come matlab
+         quindi spiegheremo come si è tradotto il modello in codice, quali attenzioni abbiamo avuto, quali strumenti, quale architettura abbiamo
+         conferito al nostro programma
+        -paragrafi che illustrano i risultati
+            -assestment del codice: collaudo e verifica di capacità funzionali, sarebbe bene che l'esercizio che facciamo vedere
+             sia controllabile, con pochi campioni, pochi punti etc così facciamo vedere come funziona e come è stato verificato
+             su casi controllato
+            -codice che funziona quando non sappiamo lavorare carta e penna o con la calcolatrice, quindi lo spingiamo nelle 
+             sue potenzialità
+            per quanto riguarda errori e campionamenti:
+            MOTIVARE SCELTE COSTRUTTIVE, CRITERIO DI ARRESTO etc, quando non abbiamo elementi diremo che abbiamo immaginato che nel 
+            nostr sistema produttivo non è garantito a livello del millimetro e quindi non siamo andati oltre, quindi facciam
+            degli scenari simulativi, bisogna fare scelte sempre consapevoli e difendibili così sappiamo dire perchè facciamo così.
+        -conclusioni: cosa abbiamo capito, quali sono i problemi aperti, cosa è stato banale e cosa complicato, elemento critico
+         dell'ottimizzazione
+         -simulazione di vincolo:
+            -vincolo che può essere gestibile con le penalità trasformando vincolo in obiettivo
+            -calcolo di una variabile rispetto alle altre e sostituzion della funzione obiettivo abbassando la dimensionalità,
+             se le mie variabili x1,x2,x3 debbono sopportare un'equazione io mi calcolo x1 e butto via nel mio modello x1 e il trattamento
+             forte dei vincoli di uguaglianza ci da il vantaggio di abbassare la dim del problema e quindi decidiamo come trattarlo
+        -esercizio di noise (???) ovvero dove abbiamo delle misure o altri parametri forniti immaginiamo di dover trattare anche le incertezze
+         o delle misure o dei parametri: mettamoci sopra dei dati aleatori con una pdf che scegliamo noi (piatta ad esempio, o gaussiana che abbia
+         un paio di dim di varianza) quindi se devo sapere dove sta la carica ho delle misure esterne e queste sono sporche, faccio 10 casi sporcando
+         le misure e vado a vedere qual è l'impatto (esempio) se con l'1% sbagliamo del millimetro, del decimo di millimetro etc, questo è il noise
+         un pò tutti abbiamo problemi di noise.
+
+E' conveniente aggiungere l'executive summary, è un'estrema sintesi per chi non ha tempo quindi metto un riassunto della mia relazione
+dentro c'è anche quale sono i problemi aperti, le conclusioni etc.
+Immaginiamo di dover leggere un documento di 100 pagine in 10 righe.
+metto un pò di introduzione e un pò di conclusione, magari qualche cosa sugli approcci.
+si può fare e metterlo nell prima slide, prima ancora dell'indice e dell'introduzione, è una cosa in cui in 5-10 righi si dice cosa si è fatto
+cosa si è capito e le criticità del problema e anche i suggerimenti.
+
+Qualche volta per motivi vari chi ci ascolta è costretto a distrarsi o si distrae, noi dobbiamo aiutarlo a seguire e quindi conviene dargli
+traccia di dove siamo nella roadmap e quindi è utile che ogni blocco di trasparenze ci ricordi dove siamo (capitolo 1 , 2, conclusioni)
+per fare queste può essere utile usare una banda in cui si riporti in maniera molto stringata il nostro percorso e si mette in evidenza
+il punto in cui siamo (il nostro indice è fatto da 6 punti e noi siamo al punto 3) ..
+
+
+             

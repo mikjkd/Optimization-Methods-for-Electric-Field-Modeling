@@ -26,6 +26,7 @@ Edesiderata = [Edesideratax; Edesideratay];
 %scrittura funzione obj normalizzata
 %fo dipendende da una variabile lmbd1
 
+
 fo = @(lmbd) (1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]); Etoty(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)])]);
 f1 = @(lmbd1,lmbd2) (1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd2,lambda(4)]); Etoty(P,xc,yc,[lmbd1,lambda(2),lmbd2,lambda(4)])]);
 f2 = @(lmbd1,lmbd2,lmbd3)(1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd2,lmbd3]); Etoty(P,xc,yc,[lmbd1,lambda(2),lmbd2,lmbd3])]);
@@ -47,13 +48,7 @@ title('Lambda 2 - Lambda 3');
 
 figure(2)
 contour(X,Y,vs,20)
-%plotto come faria fo al variare di lmbd1
-%foplot(fo,passo1);
-%figure(2)
-%plot(xc, Edesiderata)
-%grid on
-%prende l'handler della funzione e lo va a plottare nell'intervallo di
-%valori val
+
 function foplot(fo,val)
     if isa(fo, 'function_handle')
         for i = 1:length(val)
