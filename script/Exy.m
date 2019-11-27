@@ -9,6 +9,6 @@ function [Ex,Ey] = Exy(P,xc,yc,lambda)
     xf = P(1);
     yf = P(2);
     eps0 = 8.85e-12;
-    Ex = (lambda.*(xf-xc))./((2*pi*eps0).*((xf-xc).^2+(yf-yc).^2));
-    Ey = (lambda.*(yf-yc))./((2*pi*eps0).*((xf-xc).^2+(yf-yc).^2));
+    Ex = (lambda.*(xc-xf))./((2*pi*eps0).*((xc-xf).^2+(yc-yf).^2));
+    Ey = (lambda.*(yc-yf))./((2*pi*eps0).*((xc-xf).^2+(yc-yf).^2));
 end

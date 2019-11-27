@@ -27,21 +27,14 @@ plot(xc,Edesideratax)
 grid on
 
 %Edesiderata funzione media
-%Edesideratax = mean(Etotx(P,xc,yc,lambda));
+Edesideratax = mean(Etotx(P,xc,yc,lambda);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %proiezione campo desiderato su asse y
 %per ora usiamo solo x
 %Edesideratay = 2.8563e+04;
-
-%Edesideratay funzione media
-%Edesideratay = mean(Etoty(P,xc,yc,lambda));
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%vautazione edesiderata a due variabili
-%Edesiderata =  [Edesideratax; Edesideratay];
+%Edesiderata = [Edesideratax; Edesideratay];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
