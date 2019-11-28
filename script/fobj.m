@@ -1,6 +1,6 @@
 %scrittura della funzione obiettivo 
 %punti di campionamento asse x
-xc = -0.05:0.01:0.05;
+xc = -0.05:0.001:0.05;
 %intervallo campionamento xa-xb
 xa = -0.05;
 xb = 0.05;

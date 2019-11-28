@@ -241,7 +241,11 @@ methods
     end
     
     function V = evaluate(this, f, v)
-        V = f(v);
+        %disp("v: ");
+        %disp(v);
+        %disp("f: ");
+        %disp(f(v(1),v(2)));
+        V = f(v(1),v(2));
     end
     
     function V = clearBounds(this, V)
@@ -289,9 +293,9 @@ methods
             for i = 1:lenX
                 for j = 1:lenY
                     if isBound
-                        V(i, j) = f([X(i) Y(j)]) < 0;
+                        V(i, j) = f(X(i) ,Y(j)) < 0;
                     else
-                        V(i, j) = f([X(i) Y(j)]);
+                        V(i, j) = f(X(i), Y(j));
                     end
                 end
             end
