@@ -88,6 +88,6 @@ contour(X,Y,vs,20)
 figure(4)
 %mi creo i punti da graficare in 2 var
 %grafico in 2 var
-grid on;
+%sliceomatic();
 %linee di livello
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
