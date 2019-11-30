@@ -34,7 +34,7 @@ methods
             if this.settings.dimension == 3
                 view(135,20)
             elseif this.settings.dimension == 2
-                view(180, -90)
+                view(90, -90)
             end
             hold on
             colormap(hot)
