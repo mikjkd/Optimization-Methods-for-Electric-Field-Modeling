@@ -7,7 +7,7 @@ xb = 0.05;
 %punti di campionamento asse y
 yc = 0;
 %lambda funzione desiderata
-lambda = [25 50 35 10].* (1e-09);
+lambda = [25 50 35 10].* (1e-06);
 %punti in cui si trovano i 4 fili 
 P1 =  [0.08 0];
 P2 = [0 0.08];
@@ -64,7 +64,7 @@ f2 =@(lmbd1,lmbd3,lmbd4) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %istruzioni per graficare fobj
 %dove faccio variare lmbd1 per fare la ricerca del minimo
-passo1 = 1e-9:1e-9:1e-7;
+passo1 = 1e-5:1e-6:1e-4;
 %%plot (X, Y)
 %grafico in 1 var
 figure(2)
