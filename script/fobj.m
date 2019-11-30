@@ -50,6 +50,8 @@ grid on
 fo =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]));
 %f1 dipende da due variabili (lmbd1,lmbd2)
 f1 =@(lmbd1,lmbd2) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd1,lmbd2,lambda(4)]));
+%f2 dipende da due variabili (lmbd1,lmbd2,lmbd3)
+f2 =@(lmbd1,lmbd3,lmbd4) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd3,lmbd4]));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -81,4 +83,11 @@ title('Lambda 2 - Lambda 3');
 %linee di livello
 figure(3)
 contour(X,Y,vs,20)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+figure(4)
+%mi creo i punti da graficare in 2 var
+%grafico in 2 var
+grid on;
+%linee di livello
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

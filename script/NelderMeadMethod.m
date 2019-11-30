@@ -245,7 +245,12 @@ methods
         %disp(v);
         %disp("f: ");
         %disp(f(v(1),v(2)));
-        V = f(v(1),v(2));
+        %V = f(v(1),v(2));
+        if length(v) == 2
+            V = f(v(1),v(2));
+        elseif length(v) ==3
+            V = f(v(1),v(2),v(3));
+        end
     end
     
     function V = clearBounds(this, V)
@@ -273,9 +278,9 @@ methods
                 for i = 1:lenX
                     for j = 1:lenY
                         if isBound
-                            V(i, j) = f([X(i) Y(j) Z(k)]) < 0;
+                            V(i, j) = f(X(i) ,Y(j), Z(k)) < 0;
                         else
-                            V(i, j) = f([X(i) Y(j) Z(k)]);
+                            V(i, j) = f(X(i) ,Y(j) ,Z(k));
                         end
                     end
                 end
