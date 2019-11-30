@@ -1,3 +1,4 @@
+clear all;close all;clc;
 %scrittura della funzione obiettivo 
 %punti di campionamento asse x
 %intervallo campionamento xa-xb
