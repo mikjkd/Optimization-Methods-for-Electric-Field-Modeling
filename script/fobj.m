@@ -1,3 +1,4 @@
+clear all; close all; clc;
 %scrittura della funzione obiettivo 
 %punti di campionamento asse x
 xc = -0.05:0.001:0.05;
@@ -7,7 +8,7 @@ xb = 0.05;
 %punti di campionamento asse y
 yc = 0;
 %lambda funzione desiderata
-lambda = [25 50 35 10].* (1e-06);
+lambda = [25 50 35 10].* (1e-09);
 %punti in cui si trovano i 4 fili 
 P1 =  [0.08 0];
 P2 = [0 0.08];
@@ -24,6 +25,8 @@ Edesideratax = Etotx(P,xc,yc,lambda);
 %disegno campo Desiderato variabile
 figure(1)
 plot(xc,Edesideratax)
+xlabel('x [m]');
+ylabel('Edesiderato [V/m]');
 grid on
 
 %Edesiderata funzione media
@@ -49,7 +52,7 @@ grid on
 %fo dipendende da una variabile lmbd 
 fo =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]));
 %f1 dipende da due variabili (lmbd1,lmbd2)
-f1 =@(lmbd1,lmbd2) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd1,lmbd2,lambda(4)]));
+f1 =@(lmbd2,lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd2,lmbd3,lambda(4)]));
 %f2 dipende da due variabili (lmbd1,lmbd2,lmbd3)
 f2 =@(lmbd1,lmbd3,lmbd4) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd3,lmbd4]));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -64,30 +67,27 @@ f2 =@(lmbd1,lmbd3,lmbd4) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %istruzioni per graficare fobj
 %dove faccio variare lmbd1 per fare la ricerca del minimo
-passo1 = 1e-5:1e-6:1e-4;
+passo1 = 1e-9:1e-9:1e-7;
 %%plot (X, Y)
 %grafico in 1 var
 figure(2)
-subplot(1,2,1)
+%subplot(1,2,1)
 plot(passo1,fo2Deval(fo,passo1));
 grid
-title('Lambda 2');
+xlabel('{\lambda}3 [C/m]');
+ylabel('fobj({\lambda}3)');
 %mi creo i punti da graficare in 2 var
 %grafico in 2 var
 vs = fo3Deval(f1,passo1,passo1);
-subplot(1,2,2)
+figure(3);
+%subplot(1,2,2)
 [X,Y] = meshgrid(passo1,passo1);
 surf(X,Y,vs)
 colorbar
-title('Lambda 2 - Lambda 3');
+xlabel('{\lambda}2 [C/m]');
+ylabel('{\lambda}3 [C/m]');
+zlabel('fobj({\lambda}2,{\lambda}3)');
 %linee di livello
-figure(3)
+figure(4)
 contour(X,Y,vs,20)
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-figure(4)
-%mi creo i punti da graficare in 2 var
-%grafico in 2 var
-%sliceomatic();
-%linee di livello
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
