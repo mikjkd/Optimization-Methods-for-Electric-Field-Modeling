@@ -10,7 +10,7 @@ yc = 0;
 %lambda funzione desiderata
 lambda = [25 50 35 10].* (1e-09);
 %punti in cui si trovano i 4 fili 
-P1 =  [0.08 0];
+P1 = [0.08 0];
 P2 = [0 0.08];
 P3 = [-0.08 0];
 P4 = [0 -0.08];
@@ -50,7 +50,7 @@ grid on
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %scrittura funzione obj normalizzata dei campi proiettati lungo l'asse x
 %fo dipendende da una variabile lmbd 
-fo =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]));
+fo =@(lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]));
 %f1 dipende da due variabili (lmbd1,lmbd2)
 f1 =@(lmbd2,lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd2,lmbd3,lambda(4)]));
 %f2 dipende da due variabili (lmbd1,lmbd2,lmbd3)
