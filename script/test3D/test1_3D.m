@@ -9,7 +9,7 @@ yc = 0;
 %lambda funzione desiderata
 lambda = [25 50 35 10].* (1e-09);
 %punti in cui si trovano i 4 fili 
-P1 = [0.08 0];
+P1 =  [0.08 0];
 P2 = [0 0.08];
 P3 = [-0.08 0];
 P4 = [0 -0.08];
@@ -33,19 +33,19 @@ P = [P1;P2;P3;P4];
 %vautazione edesiderata a due variabili
 %Edesiderata =  [Edesideratax; Edesideratay];
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-X = [lambda(2), lambda(3)];
+X = [lambda(2), lambda(3),lambda(4)];
 test_params = struct( ...
-    'dimension', 2, ...
+    'dimension', 3, ...
     'plot', true, ...
     'minimum', X, ...
-    'sampling_step', 0.01, ...
+    'sampling_step', 0.001, ...
     'sampling_range', 0.05, ...
     'sample_amount', -1, ...
-    'max_flips', 1000, ...
+    'max_flips', 10000, ...
     'tolerance', 1e-12, ...
     'minLength', 1e-11, ...
-    'start_point', [5.3e-08 8.6e-08], ...
-    'length', 1e-9...
+    'start_point', [0.5e-06 5.45e-07 1e-08], ...
+    'length', 1e-6...
 );
 
 xc = -test_params.sampling_range:test_params.sampling_step:test_params.sampling_range; %xc =-0.05:0.01:0.05
@@ -56,6 +56,10 @@ disp(test_params)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %crimine inverso: mi creo il campo con valori lambda prefissati 
 Edesideratax = Etotx(P,xc,yc,lambda);
+%disegno campo Desiderato variabile
+% figure(1)
+% plot(xc,Edesideratax)
+% grid on
 
 %Edesiderata funzione media
 %Edesideratax = mean(Etotx(P,xc,yc,lambda));
@@ -65,9 +69,10 @@ Edesideratax = Etotx(P,xc,yc,lambda);
 %scrittura funzione obj normalizzata dei campi proiettati lungo l'asse x
 %fo dipendende da una variabile lmbd 
 bounds = {};
-fo =@(lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]));
+%fo =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]));
 %f1 dipende da due variabili (lmbd1,lmbd2)
-f1 =@(lmbd2,lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd2,lmbd3,lambda(4)]));
+%f1 =@(lmbd1,lmbd2) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd1,lmbd2,lambda(4)]));
+f2 =@(lmbd)(1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd(1),lmbd(2),lmbd(3)]));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,23 +83,21 @@ f1 =@(lmbd2,lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesid
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % simplex algorythm
 settings = struct('step', test_params.sampling_step, 'slices', floor(length(xc)), 'plot', test_params.plot, 'dimension', test_params.dimension);
-range = struct('Xmin', 0e-07, 'Xmax', 1e-07, 'Ymin', 0e-07, 'Ymax', 1e-07);
+range = struct('Xmin', 0e-06, 'Xmax', 1e-06, 'Ymin', 0e-06, 'Ymax', 1e-06,'Zmin', 0e-06, 'Zmax', 1e-06);
 stop_conditions = struct('maxFlips', test_params.max_flips, 'tolerance', test_params.tolerance, 'minLength', test_params.minLength);
 start_conditions = struct('start', test_params.start_point, 'length', test_params.length);
-obj = NelderMeadMethod(f1, bounds, stop_conditions, start_conditions, settings, range);
+obj = NelderMeadMethod(f2, bounds, stop_conditions, start_conditions, settings, range);
 % display results
 disp("Results")
 disp(obj.getResults());
 dumpResults(test_params, obj.getResults());
 if test_params.plot
     % label
-    xlabel('{\lambda}2');
-    ylabel('{\lambda}3');
+    xlabel('Lambda 1');
+    ylabel('Lambda 2');
+    zlabel('Lambda 3');
     % plot ideal minimum
     figure(1);
-    plot(X(1), X(2), 'x', 'color', 'y', 'lineWidth', 1.5);
+    plot3(X(1), X(2),X(3), 'x', 'color', 'y', 'lineWidth', 1.5);
     grid on;
 end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

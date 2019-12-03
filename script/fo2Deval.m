@@ -3,10 +3,11 @@
 %restituisce il vettore di valori v, ho creato questa funzione perchè poi
 %fare il plot dell'hanlder è molto più semplice perchè basta fare 
 %plot(intervallo, v)
-function v = fo2Deval(fo,val)
-    A = [];
+function res = fo2Deval(fo,val)
+    A = zeros([1,length(val)]);
+  
     for i = 1:length(val)
-         A= [ A, fo(val(i))];
+         A(i) = fo(val(i));
     end
-    v = A;
+    res = A;
 end

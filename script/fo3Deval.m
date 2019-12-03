@@ -4,20 +4,15 @@
 %restituisce il vettore di valori v, ho creato questa funzione perchè poi
 %fare il plot dell'hanlder è molto più semplice perchè basta fare 
 %surf(intervallo1,intervallo2, v)
-function v = fo3Deval(fo,val1,val2)
+function res = fo3Deval(fo,val1,val2)
     [X,Y] = meshgrid(val1,val2);
-    s = size(X);
-    B = [];
-    A = [];
-    for i = 1:s(1)
-
-        for j = 1:s(2)
-            B= [ B, fo(X(i,j),Y(i,j))];
+    lenX = length(X);
+    lenY = length(Y);
+    V = zeros(lenX, lenY);
+    for i = 1:lenX
+        for j = 1:lenY
+            V(i, j) = fo([X(i,j), Y(i,j)]);
         end
-        
-        A = [A; B];
-        B = [];
     end
-    
-    v = A;
+    res = V;
 end

@@ -34,7 +34,7 @@ methods
             if this.settings.dimension == 3
                 view(135,20)
             elseif this.settings.dimension == 2
-                view(90, -90)
+                view(180, -90)
             end
             hold on
             colormap(hot)
@@ -241,16 +241,7 @@ methods
     end
     
     function V = evaluate(this, f, v)
-        %disp("v: ");
-        %disp(v);
-        %disp("f: ");
-        %disp(f(v(1),v(2)));
-        %V = f(v(1),v(2));
-        if length(v) == 2
-            V = f(v(1),v(2));
-        elseif length(v) ==3
-            V = f(v(1),v(2),v(3));
-        end
+        V = f(v);
     end
     
     function V = clearBounds(this, V)
@@ -278,9 +269,9 @@ methods
                 for i = 1:lenX
                     for j = 1:lenY
                         if isBound
-                            V(i, j) = f(X(i) ,Y(j), Z(k)) < 0;
+                            V(i, j) = f([X(i) Y(j) Z(k)]) < 0;
                         else
-                            V(i, j) = f(X(i) ,Y(j) ,Z(k));
+                            V(i, j) = f([X(i) Y(j) Z(k)]);
                         end
                     end
                 end
@@ -298,9 +289,9 @@ methods
             for i = 1:lenX
                 for j = 1:lenY
                     if isBound
-                        V(i, j) = f(X(i) ,Y(j)) < 0;
+                        V(i, j) = f([X(i) Y(j)]) < 0;
                     else
-                        V(i, j) = f(X(i), Y(j));
+                        V(i, j) = f([X(i) Y(j)]);
                     end
                 end
             end

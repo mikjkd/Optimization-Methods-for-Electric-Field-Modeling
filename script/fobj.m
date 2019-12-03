@@ -1,4 +1,3 @@
-clear all; close all; clc;
 %scrittura della funzione obiettivo 
 %punti di campionamento asse x
 xc = -0.05:0.001:0.05;
@@ -50,11 +49,11 @@ grid on
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %scrittura funzione obj normalizzata dei campi proiettati lungo l'asse x
 %fo dipendende da una variabile lmbd 
-fo =@(lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]));
+fo =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd(1),lambda(4)]));
 %f1 dipende da due variabili (lmbd1,lmbd2)
-f1 =@(lmbd2,lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd2,lmbd3,lambda(4)]));
+f1 =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd(1),lmbd(2),lambda(4)]));
 %f2 dipende da due variabili (lmbd1,lmbd2,lmbd3)
-f2 =@(lmbd1,lmbd3,lmbd4) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd3,lmbd4]));
+%f2 =@(lmbd1,lmbd3,lmbd4) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd3,lmbd4]));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,6 +61,7 @@ f2 =@(lmbd1,lmbd3,lmbd4) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(
 % fo = @(lmbd) (1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]); Etoty(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)])]);
 % f1 = @(lmbd1,lmbd2) (1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd2,lambda(4)]); Etoty(P,xc,yc,[lmbd1,lambda(2),lmbd2,lambda(4)])]);
 % f2 = @(lmbd1,lmbd2,lmbd3)(1/mean(Edesiderata))* sqrt((xb-xa)/length(xc))* norm(Edesiderata - [Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd2,lmbd3]); Etoty(P,xc,yc,[lmbd1,lambda(2),lmbd2,lmbd3])]);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -90,4 +90,3 @@ zlabel('fobj({\lambda}2,{\lambda}3)');
 %linee di livello
 figure(4)
 contour(X,Y,vs,20)
-

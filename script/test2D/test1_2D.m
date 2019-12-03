@@ -43,9 +43,9 @@ test_params = struct( ...
     'sample_amount', -1, ...
     'max_flips', 1000, ...
     'tolerance', 1e-12, ...
-    'minLength', 1e-10, ...
+    'minLength', 1e-11, ...
     'start_point', [5.3e-08 8.6e-08], ...
-    'length', 1.5e-9...
+    'length', 1e-9...
 );
 
 xc = -test_params.sampling_range:test_params.sampling_step:test_params.sampling_range; %xc =-0.05:0.01:0.05
@@ -65,9 +65,9 @@ Edesideratax = Etotx(P,xc,yc,lambda);
 %scrittura funzione obj normalizzata dei campi proiettati lungo l'asse x
 %fo dipendende da una variabile lmbd 
 bounds = {};
-fo =@(lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]));
+fo =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd(3),lambda(4)]));
 %f1 dipende da due variabili (lmbd1,lmbd2)
-f1 =@(lmbd2,lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd2,lmbd3,lambda(4)]));
+f1 =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd(1),lmbd(2),lambda(4)]));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,7 +78,7 @@ f1 =@(lmbd2,lmbd3) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesid
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % simplex algorythm
 settings = struct('step', test_params.sampling_step, 'slices', floor(length(xc)), 'plot', test_params.plot, 'dimension', test_params.dimension);
-range = struct('Xmin', 3e-08, 'Xmax', 6e-08, 'Ymin', 2e-08, 'Ymax', 9e-08);
+range = struct('Xmin', 0e-07, 'Xmax', 1e-07, 'Ymin', 0e-07, 'Ymax', 1e-07);
 stop_conditions = struct('maxFlips', test_params.max_flips, 'tolerance', test_params.tolerance, 'minLength', test_params.minLength);
 start_conditions = struct('start', test_params.start_point, 'length', test_params.length);
 obj = NelderMeadMethod(f1, bounds, stop_conditions, start_conditions, settings, range);
