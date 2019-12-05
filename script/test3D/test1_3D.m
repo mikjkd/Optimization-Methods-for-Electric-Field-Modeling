@@ -72,7 +72,7 @@ bounds = {};
 %fo =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd,lambda(4)]));
 %f1 dipende da due variabili (lmbd1,lmbd2)
 %f1 =@(lmbd1,lmbd2) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd1,lmbd2,lambda(4)]));
-f2 =@(lmbd)(1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd(1),lmbd(2),lmbd(3)]));
+f2 =@(lmbd)(1/mean(Edesideratax))* sqrt(1/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd(1),lmbd(2),lmbd(3)]));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -83,7 +83,7 @@ f2 =@(lmbd)(1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax -
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % simplex algorythm
 settings = struct('step', test_params.sampling_step, 'slices', floor(length(xc)), 'plot', test_params.plot, 'dimension', test_params.dimension);
-range = struct('Xmin', 0e-06, 'Xmax', 10e-06, 'Ymin', 0e-05, 'Ymax', 10e-06,'Zmin', 0e-05, 'Zmax', 10e-06);
+range = struct('Xmin', 0e-06, 'Xmax', 10e-06, 'Ymin', 0e-06, 'Ymax', 10e-06,'Zmin', 0e-06, 'Zmax', 10e-06);
 stop_conditions = struct('maxFlips', test_params.max_flips, 'tolerance', test_params.tolerance, 'minLength', test_params.minLength);
 start_conditions = struct('start', test_params.start_point, 'length', test_params.length);
 obj = NelderMeadMethod(f2, bounds, stop_conditions, start_conditions, settings, range);
@@ -93,9 +93,9 @@ disp(obj.getResults());
 dumpResults(test_params, obj.getResults());
 if test_params.plot
     % label
-    xlabel('{\lambda}2');
-    ylabel('{\lambda}3');
-    zlabel('{\lambda}4');
+    xlabel('{\lambda}2 [C/m]');
+    ylabel('{\lambda}3 [C/m]');
+    zlabel('{\lambda}4 [C/m]');
     % plot ideal minimum
     figure(1);
     plot3(X(1), X(2),X(3), 'x', 'color', 'y', 'lineWidth', 1.5);

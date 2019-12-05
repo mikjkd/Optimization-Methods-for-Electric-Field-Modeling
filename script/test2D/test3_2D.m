@@ -65,9 +65,8 @@ Edesideratax = Etotx(P,xc,yc,lambda);
 %scrittura funzione obj normalizzata dei campi proiettati lungo l'asse x
 %fo dipendende da una variabile lmbd 
 bounds = {};
-fo =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd(1),lambda(4)]));
 %f1 dipende da due variabili (lmbd1,lmbd2)
-f1 =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd(1),lmbd(2),lambda(4)]));
+f1 =@(lmbd) (1/mean(Edesideratax))* sqrt(1/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd(1),lmbd(2),lambda(4)]));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -89,8 +88,8 @@ dumpResults(test_params, obj.getResults());
 if test_params.plot
     % label
     
-    xlabel('{\lambda}2');
-    ylabel('{\lambda}3');
+    xlabel('{\lambda}2 [C/m]');
+    ylabel('{\lambda}3 [C/m]');
     % plot ideal minimum
     figure(1);
     plot(X(1), X(2), 'x', 'color', 'y', 'lineWidth', 1.5);

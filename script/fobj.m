@@ -49,9 +49,9 @@ grid on
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %scrittura funzione obj normalizzata dei campi proiettati lungo l'asse x
 %fo dipendende da una variabile lmbd 
-fo =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd(1),lambda(4)]));
+fo =@(lmbd) (1/mean(Edesideratax))* sqrt(1/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lambda(2),lmbd(1),lambda(4)]));
 %f1 dipende da due variabili (lmbd1,lmbd2)
-f1 =@(lmbd) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd(1),lmbd(2),lambda(4)]));
+f1 =@(lmbd) (1/mean(Edesideratax))* sqrt(1/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lambda(1),lmbd(1),lmbd(2),lambda(4)]));
 %f2 dipende da due variabili (lmbd1,lmbd2,lmbd3)
 %f2 =@(lmbd1,lmbd3,lmbd4) (1/mean(Edesideratax))* sqrt((xb-xa)/length(xc))* norm(Edesideratax - Etotx(P,xc,yc,[lmbd1,lambda(2),lmbd3,lmbd4]));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -83,10 +83,11 @@ figure(3);
 %subplot(1,2,2)
 [X,Y] = meshgrid(passo1,passo1);
 surf(X,Y,vs)
+grid on
+hold on
+%linee di livello
+contour(X,Y,vs,20)
 colorbar
 xlabel('{\lambda}2 [C/m]');
 ylabel('{\lambda}3 [C/m]');
 zlabel('fobj({\lambda}2,{\lambda}3)');
-%linee di livello
-figure(4)
-contour(X,Y,vs,20)
